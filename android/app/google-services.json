@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "432577064580",
+    "firebase_url": "https://users-d3c2d.firebaseio.com",
+    "project_id": "users-d3c2d",
+    "storage_bucket": "users-d3c2d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:432577064580:android:17d586cd995c5f5d2e5cd1",
+        "android_client_info": {
+          "package_name": "com.andrew.recetas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "432577064580-h1f1mpl0qqcgttslk5kfu1c8tbj16oo3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkP3DP9vKVVHXiIlndDIyrTUaIGE27quc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "432577064580-h1f1mpl0qqcgttslk5kfu1c8tbj16oo3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
