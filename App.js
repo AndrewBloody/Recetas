@@ -18,7 +18,7 @@ import {Container, Header, Body, Content, Icon} from 'native-base';
 
 // import the different screens
 import Loading from './screens/auth/Loading';
-// import SignUp from './SignUp';
+import SignUp from './screens/auth/SignUp';
 import Login from './screens/auth/Login';
 import Main from './screens/Main';
 import User from './screens/auth/User';
@@ -179,6 +179,7 @@ const App = createAppContainer(
       AuthLoading: Loading,
       App: AppStack,
       Login: Login,
+      SignUp: SignUp,
     },
     {
       initialRouteName: 'AuthLoading',
