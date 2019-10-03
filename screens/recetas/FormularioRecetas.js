@@ -1,25 +1,88 @@
 /* ALAKASAM 2019 */
 
 import React from 'react';
+import ImagePicker from 'react-native-image-picker';
 
-import {StyleSheet, Text} from 'react-native';
-import {Container, Content} from 'native-base';
+import {StyleSheet, Text, Image} from 'react-native';
+import {Container, Content, Button} from 'native-base';
+import {Field, reduxForm} from 'redux-form';
 
-export default class FormularioRecetas extends React.Component {
+// Components
+import {Input} from './utils/Input';
+
+class FormularioRecetasComponent extends React.Component {
   static navigationOptions = {
     title: 'Formulario',
   };
 
+  constructor(props) {
+    super(props);
+
+    this.submit = this.submit.bind(this);
+    this.handleChoosePhoto = this.handleChoosePhoto.bind(this);
+
+    this.state = {
+      photo: null,
+    };
+  }
+
+  submit(values) {
+    console.log(values);
+  }
+
+  handleChoosePhoto() {
+    const options = {
+      noData: true,
+    };
+    ImagePicker.launchImageLibrary(options, response => {
+      if (response.uri) {
+        this.setState({photo: response});
+      }
+    });
+  }
+
   render() {
+    const {handleSubmit} = this.props;
     return (
       <Container>
         <Content contentContainerStyle={styles.content}>
           <Text>Formulario</Text>
+          <Button onPress={this.handleChoosePhoto}>
+            <Text>Elige una imagen</Text>
+          </Button>
+          {this.state.photo && (
+            <Image source={{uri: this.state.photo.uri}} style={styles.image} />
+          )}
+          <Field placeholder="nombre" name="nombre" component={Input} />
+          <Field
+            placeholder="descripcion"
+            name="descripcion"
+            component={Input}
+          />
+          <Field
+            placeholder="ingredientes"
+            name="ingredientes"
+            component={Input}
+          />
+          <Field
+            placeholder="procedimiento"
+            name="procedimiento"
+            component={Input}
+          />
+          <Field placeholder="notas" name="notas" component={Input} />
+          {/*<Field placeholder="tags" name="tags" component={Input} />*/}
+          <Button onPress={handleSubmit(this.submit)}>
+            <Text>Crear Receta</Text>
+          </Button>
         </Content>
       </Container>
     );
   }
 }
+
+export default reduxForm({
+  form: 'FormularioRecetas',
+})(FormularioRecetasComponent);
 
 const styles = StyleSheet.create({
   content: {
@@ -27,4 +90,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  image: {width: 300, height: 300},
 });

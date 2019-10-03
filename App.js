@@ -15,6 +15,19 @@ import {
 
 import {Image, StyleSheet} from 'react-native';
 import {Container, Header, Body, Content, Icon} from 'native-base';
+import {combineReducers} from 'redux';
+
+import {reducer as formReducer} from 'redux-form';
+
+const reducers = {
+  form: formReducer,
+};
+const allReducers = combineReducers(reducers);
+
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
+
+const store = createStore(allReducers);
 
 // import the different screens
 import Loading from './screens/auth/Loading';
@@ -173,7 +186,7 @@ const AppStack = createDrawerNavigator(
   },
 );
 
-const App = createAppContainer(
+const AppContainer = createAppContainer(
   createSwitchNavigator(
     {
       AuthLoading: Loading,
@@ -186,5 +199,15 @@ const App = createAppContainer(
     },
   ),
 );
+
+class App extends React.Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
+    );
+  }
+}
 
 export default App;
