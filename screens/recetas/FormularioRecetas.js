@@ -2,6 +2,7 @@
 
 import React from 'react';
 import ImagePicker from 'react-native-image-picker';
+import firebase from 'react-native-firebase';
 
 import {StyleSheet, Text, Image} from 'react-native';
 import {Container, Content, Button} from 'native-base';
@@ -20,6 +21,16 @@ class FormularioRecetasComponent extends React.Component {
 
     this.submit = this.submit.bind(this);
     this.handleChoosePhoto = this.handleChoosePhoto.bind(this);
+    Promise.resolve(firebase.auth()).then(response => {
+      if (response.currentUser) {
+        this.user_id = response.currentUser.uid;
+        this.ref = firebase
+          .firestore()
+          .collection('usuarios')
+          .doc(response.currentUser.uid)
+          .collection('recetas');
+      }
+    });
 
     this.state = {
       photo: null,
@@ -27,7 +38,38 @@ class FormularioRecetasComponent extends React.Component {
   }
 
   submit(values) {
-    console.log(values);
+    const {navigation} = this.props;
+    this.ref.add(values).then(response => {
+      if (this.state.photo) {
+        const refStorage = firebase
+          .storage()
+          .ref(
+            `usuarios/${this.user_id}/recetas/${response.id}/${
+              this.state.photo.fileName
+            }`,
+          );
+        const task = refStorage.put(this.state.photo.path);
+        task.on(
+          'state_changed',
+          snapshot => {
+            // Se lanza durante el progreso de subida
+            console.log(snapshot);
+          },
+          error => {
+            // Si ha ocurrido un error aquí lo tratamos
+            console.log(error);
+            navigation.navigate('Recetas');
+          },
+          response_photo => {
+            // Una vez se haya subido el archivo,
+            // se invoca ésta función
+            response
+              .update({imagen_url: response_photo.downloadURL})
+              .then(() => navigation.navigate('Recetas'));
+          },
+        );
+      }
+    });
   }
 
   handleChoosePhoto() {
