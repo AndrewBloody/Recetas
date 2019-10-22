@@ -35,10 +35,14 @@ import SignUp from './screens/auth/SignUp';
 import Login from './screens/auth/Login';
 import Main from './screens/Main';
 import User from './screens/auth/User';
-import Recetas from './screens/recetas/Recetas';
-import FormularioRecetas from './screens/recetas/FormularioRecetas';
-import RecetasFavoritas from './screens/recetas/RecetasFavoritas';
-import ListadoRecetas from './screens/recetas/ListadoRecetas';
+
+// Recetas
+import {
+  Recetas,
+  FormularioRecetas,
+  RecetasFavoritas,
+  ListadoRecetas,
+} from './screens/recetas';
 
 // Stack Navigator
 // const AppStack = createStackNavigator(

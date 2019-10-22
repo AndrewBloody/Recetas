@@ -6,7 +6,7 @@ import firebase from 'react-native-firebase';
 import {StyleSheet, Text} from 'react-native';
 import {Container, Content} from 'native-base';
 
-export default class ListadoRecetas extends React.Component {
+export class ListadoRecetas extends React.Component {
   static navigationOptions = {
     title: 'Listado',
   };

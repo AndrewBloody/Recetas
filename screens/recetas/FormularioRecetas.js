@@ -122,7 +122,7 @@ class FormularioRecetasComponent extends React.Component {
   }
 }
 
-export default reduxForm({
+export const FormularioRecetas = reduxForm({
   form: 'FormularioRecetas',
 })(FormularioRecetasComponent);
 

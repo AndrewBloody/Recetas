@@ -18,7 +18,7 @@ import {
   Body,
 } from 'native-base';
 
-export default class Recetas extends React.Component {
+export class Recetas extends React.Component {
   static navigationOptions = {
     title: 'Recetas',
     header: ({navigation}) => {
